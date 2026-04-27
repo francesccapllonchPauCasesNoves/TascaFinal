@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Web Page</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div>
+        <aside class="sidebar"> 
+            <h3>Menu</h3>
+            <ul>
+                <li><button><a href="">Llistat d'activitats</a></button></li>
+                <li><button><a href="">Crear Tasca</a></button></li>
+                <li><button><a href="">Gestió de categories</a></button></li>
+            </ul>
+        </aside>
+        </div>
+        <div class="content">
+            <h1> <b>Crea una nova tasca</b> </h1>
+
+            <form>
+                <h4>Titol</h4>
+                <input type="text" placeholder="Introdueix el titol de la tasca">
+                <h4>Descripció</h4>
+                <textarea placeholder="Introdueix la descripció de la tasca"></textarea>
+                <h4>Data</h4>
+                <input type="date">
+                <h4>Categoria</h4>
+                <select id="categories">
+                    <option value="categoria1">Categoria 1</option>
+                </select>
+                <h4>Prioritat</h4>
+                <select id="priority">
+                    <option value="baixa">Baixa</option>
+                    <option value="mitjana">Mitjana</option>
+                    <option value="alta">Alta</option>
+                </select>
+            </form>
+            
+            
+            
+        </div>
+    </div>
+</body>
+</html>
