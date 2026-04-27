@@ -2,7 +2,12 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    
+       
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color:whitesmoke;
 }
 .container{
     margin: 0px;
@@ -39,9 +44,8 @@
     padding-left: 4px;
 }
 .sidebar ul li button a{
-    text-color: white;
+    text-color: whites;
     text-decoration: none;
-    color: white;
     background-color:rgb(31, 90, 255);
     padding: 5px;
     display: block;
@@ -76,4 +80,12 @@
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+.tasca-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 35%;
+    padding: 20px;
+    background-color: white;
 }
