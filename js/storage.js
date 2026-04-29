@@ -22,3 +22,9 @@ export function obtenirCategories() {
     if(!categories) return [];
     return JSON.parse(categories);
 }
+
+export function eliminarTasca(index) {
+    const tasques = obtenirTasques();
+    tasques.splice(index, 1);
+    localStorage.setItem('tasques', JSON.stringify(tasques));
+}
