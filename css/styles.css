@@ -46,9 +46,15 @@ body{
 .sidebar ul li button a{
     text-color: whites;
     text-decoration: none;
-    background-color:rgb(31, 90, 255);
+
     padding: 5px;
     display: block;
+    border:none;
+}
+
+.sidebar ul li button a:hover{
+    background-color:rgb(31, 90, 255);
+
 }
 
 .content{
@@ -88,4 +94,23 @@ body{
     width: 35%;
     padding: 20px;
     background-color: white;
+}
+
+.category-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 35%;
+    padding: 20px;
+    background-color: white;
+    margin-top: 20px;
+}
+.tasques{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 35%;
+    padding: 20px;
+    align-items: flex-start;
+    margin-left: 9vh;
 }
