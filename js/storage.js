@@ -28,3 +28,9 @@ export function eliminarTasca(index) {
     tasques.splice(index, 1);
     localStorage.setItem('tasques', JSON.stringify(tasques));
 }
+
+export function eliminarCategoria(index) {
+    const categories = obtenirCategories();
+    categories.splice(index, 1);
+    localStorage.setItem('categories', JSON.stringify(categories));
+}

@@ -14,6 +14,11 @@ formulari.addEventListener('submit', (event) => {
     const nom= document.getElementById('inputCategoria').value;
     const color = document.getElementById('colorPicker').value;
     
+    if(nom.trim() === '') {
+        alert('El nom de la categoria no pot estar buit');
+        return;
+    }
+
     const novaCategoria = {nom,color};
 
     guardarCategoria(novaCategoria);
@@ -22,6 +27,7 @@ formulari.addEventListener('submit', (event) => {
 });
 
 contenedorCategories.addEventListener('click', (event) => {
+
     if(event.target.classList.contains('eliminar-btn')) {
         const index = event.target.getAttribute('data-index');
         eliminarCategoria(index);
@@ -31,8 +37,8 @@ contenedorCategories.addEventListener('click', (event) => {
 
 function mostrarCategories() {
     const categories = obtenirCategories();
-    const contenedorCategories = document.getElementById('categories');
     contenedorCategories.innerHTML = '';
+    
     categories.forEach((categoria, index) => {
         
         const categoriaNova = document.createElement('div');
