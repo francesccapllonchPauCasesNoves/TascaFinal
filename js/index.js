@@ -81,29 +81,43 @@ function canviarEstatTasca(index) {
 btnArxiu.addEventListener('click', async () => {
     const nomArxiu = inputArxiu.value;
 
-    if(!nomArxiu) {
-        alert('Escriu el nom del arxiu');
-        return;
-    }
+    if(!nomArxiu)return alert('Escriu el nom del arxiu');
+        
 
     try {
         const resposta = await fetch(`./dades/${nomArxiu}`);
-
         if(!resposta.ok) throw new Error('No s\'ha pogut carregar el arxiu');
 
-        const novesTasques = await resposta.json();
+        const dadesImportades = await resposta.json();
+        const categoriesActuals = obtenirCategories();
 
-        novesTasques.forEach(tasca => {
+        dadesImportades.forEach(tasca => {
+            if(tasca.categoria && typeof tasca.categoria === 'object'){
+                const existeix = categoriesActuals.some(cat => cat.nom === tasca.categoria.nom);
+
+                if(!existeix) {
+                    const novaCategoria = {
+                        nom: tasca.categoria.nom,
+                        color: tasca.categoria.color || '#fff'
+                    };
+                    guardarCategoria(novaCategoria);
+                    categoriesActuals.push(novaCategoria);
+                }
+
+                tasca.categoria = tasca.categoria.nom;
+            }
+
             guardarTasca(tasca);
+
         });
 
-            alert('Tasques carregades correctament');
-            mostrarTasques();
-            inputArxiu.value = '';
+        alert('Dades carregades correctament');
+        mostrarTasques();
+        inputArxiu.value = '';
 
-            
-        } catch (error) {
-            console.error(error);
-            alert('Error al carregar l\'arxiu. Revisa que el nom i la carpeta /dades/ siguin correctes.');
-        }
+    } catch (error) {
+        console.error(error);
+        alert('Error al carregar l\'arxiu. Revisa que el nom i la carpeta /dades/ siguin correctes.');
+    }
 });
+
