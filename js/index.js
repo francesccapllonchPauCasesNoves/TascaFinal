@@ -1,4 +1,4 @@
-import{ obtenirTasques, eliminarTasca, guardarTasca, obtenirCategories } from "./storage.js";
+import{ obtenirTasques, eliminarTasca, guardarTasca, obtenirCategories, guardarCategoria } from "./storage.js";
 
 const divPendents = document.getElementById('pendents');
 const divCompletades = document.getElementById('completades');
@@ -28,6 +28,9 @@ function mostrarTasques() {
 
         const tascaNova = document.createElement('div');
         tascaNova.className = `tasca-card ${tasca.prioritat}`;
+
+        const catTrobada = categories.find(cat => cat.nom === tasca.categoria);
+        const colorFons = catTrobada ? catTrobada.color : '#fff';
 
         tascaNova.style.backgroundColor = fonsCategoria;
         tascaNova.style.padding = '15px';
