@@ -1,19 +1,39 @@
-import{ obtenirTasques, eliminarTasca, guardarTasca } from "./storage.js";
+import{ obtenirTasques, eliminarTasca, guardarTasca, obtenirCategories } from "./storage.js";
 
 const divPendents = document.getElementById('pendents');
 const divCompletades = document.getElementById('completades');
+const btnArxiu = document.getElementById('btnArxiu');
+const inputArxiu = document.getElementById('inputTasca');
+const btnCrearTasca = document.getElementById('btnCrearTasca');
+
+if(btnCrearTasca) {
+    btnCrearTasca.addEventListener('click', () => {
+        window.location.href = 'crear-tasca.html';
+    });
+}
 
 mostrarTasques();
 
 function mostrarTasques() {
     const tasques = obtenirTasques();
+    const categories = obtenirCategories();
 
     divPendents.innerHTML = '';
     divCompletades.innerHTML = '';
 
     tasques.forEach((tasca, index) => {
+
+        const categoriaTasca = categories.find(cat => cat.nom === tasca.categoria);
+        const fonsCategoria = categoriaTasca ? categoriaTasca.color : '#fff';
+
         const tascaNova = document.createElement('div');
         tascaNova.className = `tasca-card ${tasca.prioritat}`;
+
+        tascaNova.style.backgroundColor = fonsCategoria;
+        tascaNova.style.padding = '15px';
+        tascaNova.style.marginBottom = '10px';
+        tascaNova.style.borderRadius = '8px';
+        tascaNova.style.border = '1px solid #ccc';
 
         tascaNova.innerHTML = `
             <h3>${tasca.titol}</h3>
@@ -57,3 +77,33 @@ function canviarEstatTasca(index) {
     localStorage.setItem('tasques', JSON.stringify(tasques));
     mostrarTasques();
 }
+
+btnArxiu.addEventListener('click', async () => {
+    const nomArxiu = inputArxiu.value;
+
+    if(!nomArxiu) {
+        alert('Escriu el nom del arxiu');
+        return;
+    }
+
+    try {
+        const resposta = await fetch(`./dades/${nomArxiu}`);
+
+        if(!resposta.ok) throw new Error('No s\'ha pogut carregar el arxiu');
+
+        const novesTasques = await resposta.json();
+
+        novesTasques.forEach(tasca => {
+            guardarTasca(tasca);
+        });
+
+            alert('Tasques carregades correctament');
+            mostrarTasques();
+            inputArxiu.value = '';
+
+            
+        } catch (error) {
+            console.error(error);
+            alert('Error al carregar l\'arxiu. Revisa que el nom i la carpeta /dades/ siguin correctes.');
+        }
+});
