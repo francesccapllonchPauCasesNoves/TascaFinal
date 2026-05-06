@@ -1,4 +1,6 @@
 import{ obtenirTasques, eliminarTasca, guardarTasca, obtenirCategories, guardarCategoria } from "./storage.js";
+import { pintarGrafic } from './grafics.js';
+
 
 const divPendents = document.getElementById('pendents');
 const divCompletades = document.getElementById('completades');
@@ -124,3 +126,11 @@ btnArxiu.addEventListener('click', async () => {
     }
 });
 
+
+
+
+const ctx = document.getElementById('grafics').getContext('2d');
+pintarGrafic(ctx, dadesPerMes);
+
+//configurar grafic amb chart.js
+const
