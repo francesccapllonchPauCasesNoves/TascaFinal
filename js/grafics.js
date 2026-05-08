@@ -1,37 +1,38 @@
-//crea els grafics apartir de unes tasques com a parametre iles pinta al grafic
-import Chart from 'chart.js/auto';
-
-import { obtenirTasques } from './storage.js';
-
-const ctx = document.getElementById('grafics').getContext('2d');
-
+// Crea el gràfic a partir de les dades de tasques completades per mes
 export function pintarGrafic(ctx, dades) {
+    if (typeof Chart === 'undefined') {
+        throw new Error('Chart.js no està carregat. Assegura`t que el script de Chart.js s’ha importat abans.');
+    }
 
-    let existingChart = Chart.getChart(ctx);
+    const existingChart = Chart.getChart(ctx);
     if (existingChart) {
         existingChart.destroy();
     }
 
-
-
-new Chart(ctx, {
+    return new Chart(ctx, {
         type: 'line',
-        animation: 'false',
-    data: {
-      labels: ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'],
-      
-      // label dataset titol
-      datasets: [{
-        label: 'Tasques Completades',
-        data: Object.values(dades),
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+        data: {
+            labels: ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'],
+            datasets: [{
+                label: 'Tasques Completades',
+                data: dades,
+                borderWidth: 2,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                fill: true,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
         }
-      }
-    }
-  });
+    });
+}
