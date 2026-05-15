@@ -1,0 +1,20 @@
+<!ELEMENT activitats (activitat+)>
+<!ELEMENT activitat (id, titol, descripcio, data, categoria, prioritat, realitzada)>
+
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT titol (#PCDATA)>
+<!ELEMENT descripcio (#PCDATA)>
+<!ELEMENT data (#PCDATA)>
+<!ELEMENT categoria (nomCat, color)>
+    
+    <!ELEMENT nomCat (#PCDATA)>
+    <!ELEMENT color (#PCDATA)>
+
+<!ELEMENT prioritat (nom)>
+
+<!ATTLIST prioritat 
+    tipus (baixa | mitjana | alta) #REQUIRED>
+
+    <!ELEMENT nom (#PCDATA)>
+
+<!ELEMENT realitzada (#PCDATA)>

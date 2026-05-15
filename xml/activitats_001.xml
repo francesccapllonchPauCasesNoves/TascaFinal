@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copia de activitats001.json pero amb format xml-->
+
+<!DOCTYPE activitats SYSTEM "activitats.dtd">
+<activitats>
+    <activitat>
+        <id>task-001</id>
+        <titol>Crea l'estructura de carpetes del projecte</titol>
+        <descripcio>Organitza els fitxers: HTML, CSS, JS, dades...</descripcio>
+        <data >2025-04-15</data>
+        <categoria>
+            <nomCat>Organització</nomCat>
+            <color>#f7df1e</color>
+        </categoria>
+        <prioritat tipus = "alta" >
+                <nom>Alta</nom>
+        </prioritat>
+        <realitzada>false</realitzada>
+    </activitat>
+    <activitat>
+        <id>task-002</id>
+        <titol>Diseny la interfície d'index</titol>
+        <descripcio>Mostrar llista de tasques</descripcio>
+        <data >2025-04-16</data>
+        <categoria>
+            <nomCat>Disseny</nomCat>
+            <color>##e5989b</color>
+        </categoria>
+        <prioritat tipus = "mitjana" >
+                <nom>Mitjana</nom>
+        </prioritat>
+        <realitzada>false</realitzada>
+
+    </activitat>
+    <activitat>
+        <id>task-003</id>
+        <titol>Implementa el formulari a crear-tasca.html</titol>
+        <descripcio>Inclou validació dels camps i guardat a localStorage.</descripcio>
+        <data >2025-04-17</data>
+        <categoria>
+            <nomCat>Formularis</nomCat>
+            <color>#6c5ce7</color>
+        </categoria>
+        <prioritat tipus = "alta" >
+                <nom>Alta</nom>
+        </prioritat>
+        <realitzada>false</realitzada>
+        
+    </activitat>
+    <activitat>
+        <id>task-004</id>
+        <titol>Permet marcar les tasques com a fetes</titol>
+        <descripcio>Afegir checkbox a index.html i actualitzar l'estat.</descripcio>
+        <data >2025-04-18</data>
+        <categoria>
+            <nomCat>Formularis</nomCat>
+            <color>#00cec9</color>
+        </categoria>
+        <prioritat tipus = "alta" >
+                <nom>Alta</nom>
+        </prioritat>
+        <realitzada>false</realitzada>
+        
+    </activitat>
+    <activitat>
+        <id>task-005</id>
+        <titol>Crea el gràfic amb Chart.js</titol>
+        <descripcio>Mostrar les tasques fetes per mes en format bar chart.</descripcio>
+        <data >2025-04-20</data>
+        <categoria>
+            <nomCat>Visualització</nomCat>
+            <color>#fab1a0</color>
+        </categoria>
+        <prioritat tipus = "alta" >
+                <nom>Alta</nom>
+        </prioritat>
+        <realitzada>false</realitzada>
+        
+    </activitat>  
+</activitats>
