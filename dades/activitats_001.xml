@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--  Copia de activitats001.json pero amb format xml-->
 
-<!DOCTYPE activitats SYSTEM "activitats.dtd">
-<activitats>
+<activitats xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+            xsi:noNamespaceSchemaLocation="activitats.xsd">
+    
     <activitat>
         <id>task-001</id>
         <titol>Crea l'estructura de carpetes del projecte</titol>

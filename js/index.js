@@ -43,16 +43,39 @@ btnArxiu.addEventListener('click', async () => {
     const nomArxiu = inputArxiu.value;
 
     if(!nomArxiu)return alert('Escriu el nom del arxiu');
-        
+    
+    const extensio = nomArxiu.split('.').pop().toLowerCase();
 
     try {
         const resposta = await fetch(`./dades/${nomArxiu}`);
         if(!resposta.ok) throw new Error('No s\'ha pogut carregar el arxiu');
 
-        const dadesImportades = await resposta.json();
         const categoriesActuals = obtenirCategories();
 
-        dadesImportades.forEach(tasca => {
+        if(extensio === 'json') {
+            const dades = await resposta.json();
+            processarJSON(dades, categoriesActuals);
+            alert('Dades carregades correctament');
+        } else if(extensio === 'xml') {
+            const textXML = await resposta.text();
+            processarXML(textXML, categoriesActuals);
+            alert('Dades carregades correctament');
+        } else {
+            alert('Format de arxiu no suportat. Utilitza .json o .xml');
+            return;
+        }
+
+        mostrarTasques();
+        inputArxiu.value = '';
+
+    } catch (error) {
+        console.error(error);
+        alert('Error al carregar l\'arxiu. Revisa que el nom i la carpeta /dades/ siguin correctes.');
+    }
+});
+
+function processarJSON(dades, categoriesActuals) {
+    dadesImportades.forEach(tasca => {
             if(tasca.categoria && typeof tasca.categoria === 'object'){
                 const existeix = categoriesActuals.some(cat => cat.nom === tasca.categoria.nom);
 
@@ -71,16 +94,46 @@ btnArxiu.addEventListener('click', async () => {
             guardarTasca(tasca);
 
         });
-
-        alert('Dades carregades correctament');
-        mostrarTasques();
-        inputArxiu.value = '';
-
-    } catch (error) {
-        console.error(error);
-        alert('Error al carregar l\'arxiu. Revisa que el nom i la carpeta /dades/ siguin correctes.');
     }
-});
+
+
+function processarXML(textXML, categoriesActuals) {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(textXML, 'application/xml');
+    const activitatsXML =  xmlDoc.getElementsByTagName('activitat');
+
+    Array.from(activitatsXML).forEach(item => {
+        const nomCat = item.getElementsByTagName('nomCat')[0]?.textContent || 'Sense Categoria';
+    
+    if(nomCat === 'Sense Categoria') {
+        const existeix = categoriesActuals.some(cat => cat.nom === nomCat);
+        if(!existeix) {
+            const novaCat = {
+                nom: nomCat,
+                color: item.getElementsByTagName('colorCat')[0]?.textContent || '#fff'
+            };
+            guardarCategoria(novaCat);
+            categoriesActuals.push(novaCat);
+        }
+    }
+
+    const novaTasca = {
+        id: item.getElementsByTagName('id')[0]?.textContent || '',
+        titol: item.getElementsByTagName('titol')[0]?.textContent || '',
+        descripcio: item.getElementsByTagName('descripcio')[0]?.textContent || '',
+        data: item.getElementsByTagName('data')[0]?.textContent || '',
+        realitzada: item.getElementsByTagName('realitzada')[0]?.textContent === 'true',
+        prioritat: item.getElementsByTagName('prioritat')[0]?.textContent || 'Baixa',
+        catergoria: nomCat
+    };
+
+    guardarTasca(novaTasca);
+    });
+
+
+}
+
+
 
 function obtenirDadesPerMes() {
     const tasques = obtenirTasques();

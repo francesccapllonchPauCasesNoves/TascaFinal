@@ -5,14 +5,13 @@
 <xs:element name="activitats">
     <xs:complexType>
         <xs:sequence>
-            <xs:element name="activitat" maxOccurs="unbounded"/>
+            <xs:element name="activitat" maxOccurs="unbounded">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="id" type="xs:string"/>
                         <xs:element name="titol" type="xs:string"/>
                         <xs:element name="descripcio" type="xs:string"/>
                         <xs:element name="data" type="xs:string"/>
-                
                         <xs:element name="categoria">
                             <xs:complexType>
                                 <xs:sequence>
@@ -25,10 +24,20 @@
                         <xs:element name="prioritat">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="nom" type="xs:string"/>
+                                    <xs:element name="nom">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="Alta"/>
+                                                <xs:enumeration value="Mitjana"/>
+                                                <xs:enumeration value="Baixa"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
                                 </xs:sequence>
+                                <xs:attribute name="tipus" type="xs:string" use="required"/>
                             </xs:complexType>
                         </xs:element>
+                        <xs:element name="realitzada" type="xs:string"/> 
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
